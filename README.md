@@ -388,11 +388,13 @@ Examples include show() to display the data, count() to count the number of rows
 
 ```scala
 // Display the first 10 rows
-myDataFrame.show(10)
+selectedDF.show(10)
 
 // Count the number of rows
-val rowCount = myDataFrame.count()
+val rowCount = selectedDF.count()
 ```
+
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/3f85c5e2-77c0-453e-ad76-bbf48fea155a)
 
 ### Integration with Spark SQL:
 
