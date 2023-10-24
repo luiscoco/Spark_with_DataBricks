@@ -111,9 +111,35 @@ Third step we enter the scala code and we select in the
 
 ![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/b3d24d39-6ea6-4321-bf95-88e7041982e6)
 
-Four step we 
+Four step we create a cluster and attach to it
 
-Fifth step is 
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/ef6dca8f-ff56-46c7-868a-26c18162c3bc)
+
+Fifth step we input the scala source code
+
+```scala
+%scala
+// Read a CSV file into a DataFrame
+val csvPath = "/FileStore/tables/fileCSV.csv"  // Specify the correct DBFS path
+val csvDF = spark.read.csv(csvPath)
+
+// Show the content of the DataFrame
+csvDF.show()
+```
+
+Sixth step, we create a CSV file in my local laptop
+
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/4967159e-dc55-4323-a5e9-c0c4dfc1732b)
+
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/2f5d5065-b234-4c16-aa5f-5f950b244f72)
+
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/be1f8d7b-61f1-43bf-980d-a3ff181fe864)
+
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/70e019ba-cf1a-4d59-8617-c600e35a7a13)
+
+
+
+
 
 ```scala
 // Read a CSV file into a DataFrame
