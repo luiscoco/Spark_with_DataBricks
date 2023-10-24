@@ -300,15 +300,84 @@ DataFrames support a wide range of operations, such as filtering, selecting, gro
 
 These operations are performed in a similar manner to SQL queries.
 
+Here's an example that demonstrates filtering, selecting, grouping, and aggregating operations on the DataFrame created with the sample data:
+
 ```scala
-// Selecting specific columns
-val selectedDF = myDataFrame.select("ColumnName1", "ColumnName2")
+// Import necessary libraries
+import org.apache.spark.sql.functions._
 
-// Filtering data
-val filteredDF = myDataFrame.filter("ColumnName1 > 10")
+// Filter the DataFrame to select people with age greater than 25
+val filteredDF = df.filter("Age > 25")
 
-// Grouping and aggregating
-val groupedDF = myDataFrame.groupBy("ColumnName1").agg(avg("ColumnName2"))
+// Select only the "Name" column
+val selectedDF = df.select("Name")
+
+// Group the DataFrame by age and count the occurrences
+val groupedDF = df.groupBy("Age").count()
+
+// Aggregate the DataFrame to find the average age
+val avgAgeDF = df.agg(avg("Age"))
+
+// Show the results
+println("Filtered DataFrame:")
+filteredDF.show()
+
+println("Selected DataFrame:")
+selectedDF.show()
+
+println("Grouped DataFrame:")
+groupedDF.show()
+
+println("Average Age:")
+avgAgeDF.show()
+```
+
+This code snippet demonstrates:
+
+Filtering: Selecting individuals with an age greater than 25.
+
+Selecting: Choosing only the "Name" column.
+
+Grouping: Grouping the DataFrame by the "Age" column.
+
+Aggregating: Calculating the average age of all individuals.
+
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/b516c2fe-72c4-48cd-a0ef-cbf9816708c0)
+
+This is the output:
+
+```
+Filtered DataFrame:
++----+---+
+|Name|Age|
++----+---+
+|John| 28|
++----+---+
+
+Selected DataFrame:
++-----+
+| Name|
++-----+
+| John|
+|Alice|
+|  Bob|
++-----+
+
+Grouped DataFrame:
++---+-----+
+|Age|count|
++---+-----+
+| 28|    1|
+| 22|    1|
+| 25|    1|
++---+-----+
+
+Average Age:
++--------+
+|avg(Age)|
++--------+
+|    25.0|
++--------+
 ```
 
 ### Action:
