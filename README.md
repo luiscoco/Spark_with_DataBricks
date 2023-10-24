@@ -93,6 +93,87 @@ h) **Stopping SparkSession:** Ending the SparkSession.
 
 ## 2.2. DataFrames Basics. Exercises
 
+Here are a few more examples of common operations you might perform with DataFrames in Scala Spark:
+
+### Reading Data from a File:
+
+```scala
+// Read a CSV file into a DataFrame
+val csvPath = "/path/to/your/file.csv"
+val csvDF = spark.read.csv(csvPath)
+
+// Read a Parquet file into a DataFrame
+val parquetPath = "/path/to/your/file.parquet"
+val parquetDF = spark.read.parquet(parquetPath)
+```
+
+### Writing Data to a File:
+
+```scala
+// Write a DataFrame to a CSV file
+val outputCsvPath = "/path/to/your/output.csv"
+csvDF.write.csv(outputCsvPath)
+
+// Write a DataFrame to a Parquet file
+val outputParquetPath = "/path/to/your/output.parquet"
+parquetDF.write.parquet(outputParquetPath)
+```
+
+### Grouping and Aggregation:
+
+```scala
+// Group by a column and calculate the average age
+val groupedDF = df.groupBy("Occupation").agg(avg("Age").as("AverageAge"))
+groupedDF.show()
+```
+
+### Adding a New Column:
+
+```scala
+// Add a new column based on a condition
+val newDF = df.withColumn("Status", when($"Age" > 30, "Senior").otherwise("Junior"))
+newDF.show()
+```
+
+### Filtering with SQL Expression:
+
+```scala
+// Filter the DataFrame using SQL expression
+val filteredSQLDF = df.filter("Age > 30")
+filteredSQLDF.show()
+```
+
+### Running SQL Queries:
+
+```scala
+Copy code
+// Create a temporary SQL table
+df.createOrReplaceTempView("people")
+
+// Run a SQL query on the DataFrame
+val sqlResult = spark.sql("SELECT * FROM people WHERE Age > 30")
+sqlResult.show()
+```
+
+### Handling Missing Values:
+
+```scala
+// Drop rows with any missing values
+val dfWithoutNull = df.na.drop()
+
+// Fill missing values with a specific value
+val dfFilled = df.na.fill(0)
+```
+
+### Exploding Arrays:
+
+```scala
+// Explode a column of arrays into separate rows
+val arrayDF = Seq((1, Seq("apple", "orange")), (2, Seq("banana", "grape"))).toDF("id", "fruits")
+val explodedDF = arrayDF.select($"id", explode($"fruits").as("fruit"))
+explodedDF.show()
+```
+
 ## 2.3. How DataFrames Work
 
 ## 2.4. Data Sources
