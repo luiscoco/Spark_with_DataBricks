@@ -71,24 +71,23 @@ spark.stop()
 
 Let me explain what's happening in the code:
 
-Creating SparkSession: The entry point for Spark functionality.
+a) **Creating SparkSession:** The entry point for Spark functionality.
 
-Creating a DataFrame: Using a sequence of data and column names.
+b) **Creating a DataFrame:** Using a sequence of data and column names.
 
-Showing the DataFrame: Displaying the content of the DataFrame.
+c) **Showing the DataFrame:** Displaying the content of the DataFrame.
 
-Selecting a Column: Accessing a specific column.
+d) **Selecting a Column:** Accessing a specific column.
 
-Filtering Data: Applying a filter condition.
+e) **Filtering Data:** Applying a filter condition.
 
-Aggregation: Calculating the average age.
+f) **Aggregation:** Calculating the average age.
 
-Joining DataFrames: Combining two DataFrames based on a common column.
+g) **Joining DataFrames:** Combining two DataFrames based on a common column.
 
-Stopping SparkSession: Ending the SparkSession.
+h) **Stopping SparkSession:** Ending the SparkSession.
 
-
-
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/2b3046e7-5861-4548-98bb-a756be92cbe8)
 
 ## 2.2. DataFrames Basics. Exercises
 
