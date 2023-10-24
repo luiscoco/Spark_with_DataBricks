@@ -153,6 +153,15 @@ Ten step, we drag and drop the CSV file
 
 ![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/d47f4769-f003-4d9a-80af-d4a6ca4c4d0c)
 
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/3c1fd784-01ad-45f8-9d10-8224a96eb31e)
+
+
+
+
+
+
+
+
 
 
 ```scala
