@@ -411,6 +411,8 @@ val aliceValue = result.collect()(0)(0).toString
 println(aliceValue)
 ```
 
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/d7d312b0-e6b5-4736-9a33-8db27a77daa2)
+
 ### Optimizations:
 
 Spark optimizes the execution plan of DataFrames using a query optimizer called Catalyst. 
