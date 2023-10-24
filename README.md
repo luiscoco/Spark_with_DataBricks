@@ -95,7 +95,25 @@ h) **Stopping SparkSession:** Ending the SparkSession.
 
 Here are a few more examples of common operations you might perform with DataFrames in Scala Spark:
 
-### Reading Data from a File:
+### Reading Data from a File with Scala Spark DataBricks:
+
+First we login in DataBricks Community edition
+
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/0c076041-491a-4e76-affb-9fef6ae7f33d)
+
+Second we create a new Notebook
+
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/36af7962-b3fb-4d73-aa50-2f7ea3188843)
+
+Third step we enter the scala code and we select in the 
+
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/d3dac90b-f981-406b-9af1-11af96e3b47f)
+
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/b3d24d39-6ea6-4321-bf95-88e7041982e6)
+
+Four step we 
+
+Fifth step is 
 
 ```scala
 // Read a CSV file into a DataFrame
