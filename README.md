@@ -1,5 +1,7 @@
 # Udemy Apache Spark 3. Big Data Essentials in Scala Rock the JVM
 
+https://github.com/rockthejvm/spark-essentials
+
 # 1. Welcome
 
 ## 1.1. DataBricks Community
