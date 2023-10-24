@@ -402,10 +402,13 @@ DataFrames seamlessly integrate with Spark SQL, allowing you to run SQL queries 
 
 ```scala
 // Registering the DataFrame as a temporary table
-myDataFrame.createOrReplaceTempView("myTable")
+selectedDF.createOrReplaceTempView("myTable")
 
-// Running SQL queries on the DataFrame
-val result = spark.sql("SELECT * FROM myTable WHERE ColumnName1 > 10")
+// Running SQL queries on the DataFrame with TRIM
+val result = spark.sql("SELECT Name FROM myTable WHERE TRIM(Name) = 'Alice' LIMIT 1")
+// Collect the result and print the value
+val aliceValue = result.collect()(0)(0).toString
+println(aliceValue)
 ```
 
 ### Optimizations:
