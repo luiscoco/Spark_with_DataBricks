@@ -261,9 +261,33 @@ Here's a brief overview of how DataFrames work in Scala with Spark:
 You can create a DataFrame from various sources, such as Hive tables, external databases, existing RDDs (Resilient Distributed Datasets), or even from local collections.
 
 ```scala
-// Creating a DataFrame from an existing RDD
-val myRDD: RDD[(String, Int)] = ...
-val myDataFrame = myRDD.toDF("ColumnName1", "ColumnName2")
+// Import necessary libraries
+import org.apache.spark.sql.{SparkSession, Row}
+import org.apache.spark.sql.types.{StructType, StructField, StringType, IntegerType}
+
+// Create a Spark session
+val spark = SparkSession.builder.appName("example").getOrCreate()
+
+// Define the schema
+val schema = StructType(
+  Array(
+    StructField("Name", StringType, true),
+    StructField("Age", IntegerType, true)
+  )
+)
+
+// Provide sample data
+val data = Seq(
+  Row("John", 28),
+  Row("Alice", 22),
+  Row("Bob", 25)
+)
+
+// Create DataFrame
+val df = spark.createDataFrame(spark.sparkContext.parallelize(data), schema)
+
+// Show the DataFrame
+df.show()
 ```
 
 ![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/b79379d6-23c2-4d7d-ab12-9f4479251c7c)
