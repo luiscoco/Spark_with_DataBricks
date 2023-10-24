@@ -69,6 +69,8 @@ joinedDF.show()
 spark.stop()
 ```
 
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/a68d306e-e5a2-48e7-8596-9c89c8717df9)
+
 Let me explain what's happening in the code:
 
 a) **Creating SparkSession:** The entry point for Spark functionality.
