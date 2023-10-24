@@ -490,12 +490,18 @@ Sure, when it comes to working with Scala and Spark in Databricks, you might wan
 ### CSV:
 
 ```scala
-val df = spark.read.csv("/path/to/csv/file")
+%scala
+// Read a CSV file into a DataFrame
+val csvPath = "/FileStore/tables/fileCSV.csv"  // Specify the correct DBFS path
+val csvDF = spark.read.csv(csvPath)
+
+// Show the content of the DataFrame
+csvDF.show()
 ```
 
 ### JSON:
 
-```
+```scala
 %scala
 // Read a json file into a DataFrame
 val jsonPath = "/FileStore/tables/cars-1.json"  // Specify the correct DBFS path
