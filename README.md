@@ -483,6 +483,62 @@ This repartitions the DataFrame based on the values in "someColumn," which can o
 
 ## 2.4. Data Sources
 
+Sure, when it comes to working with Scala and Spark in Databricks, you might want to leverage various data sources.
+
+### CSV:
+
+```scala
+val df = spark.read.csv("/path/to/csv/file")
+```
+
+### JSON:
+
+```scala
+val df = spark.read.json("/path/to/json/file")
+```
+
+### Parquet:
+
+```scala
+val df = spark.read.parquet("/path/to/parquet/file")
+```
+
+### Avro:
+
+```scala
+val df = spark.read.format("avro").load("/path/to/avro/file")
+```
+
+### Delta Lake:
+
+```scala
+Copy code
+val df = spark.read.format("delta").load("/path/to/delta/lake")
+```
+
+### ORC:
+
+```scala
+val df = spark.read.format("orc").load("/path/to/orc/file")
+```
+
+### JDBC:
+
+```scala
+val jdbcUrl = "jdbc:mysql://hostname:port/dbname"
+val df = spark.read.format("jdbc").option("url", jdbcUrl).option("dbtable", "tablename").load()
+```
+
+### Cassandra:
+
+```scala
+val df = spark.read.format("org.apache.spark.sql.cassandra").option("keyspace", "keyspace").option("table", "table").load()
+```
+
+Remember to replace the file paths and connection details with your specific information. 
+
+These examples assume that you have a SparkSession named spark already created.
+
 ## 2.5. Data Sources. Exercises
 
 ## 2.6. DataFrames Columns and Expressions
