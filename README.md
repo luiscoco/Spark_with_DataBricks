@@ -566,7 +566,7 @@ These examples assume that you have a SparkSession named spark already created.
 
 
 
-## 5. Low-Level Spark.
+# 5. Low-Level Spark.
 
 .adfa
 
