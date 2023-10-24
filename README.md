@@ -266,6 +266,10 @@ val myRDD: RDD[(String, Int)] = ...
 val myDataFrame = myRDD.toDF("ColumnName1", "ColumnName2")
 ```
 
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/b79379d6-23c2-4d7d-ab12-9f4479251c7c)
+
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/13d7601e-53e8-4998-a1a6-139953169ea3)
+
 ### Transformation:
 
 DataFrames support a wide range of operations, such as filtering, selecting, grouping, and aggregating data. 
