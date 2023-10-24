@@ -495,9 +495,16 @@ val df = spark.read.csv("/path/to/csv/file")
 
 ### JSON:
 
-```scala
-val df = spark.read.json("/path/to/json/file")
 ```
+%scala
+// Read a json file into a DataFrame
+val jsonPath = "/FileStore/tables/cars-1.json"  // Specify the correct DBFS path
+val jsonDF = spark.read.json(jsonPath)
+// Show the content of the DataFrame
+jsonDF.show()
+```
+
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/0d0c6c44-8feb-4e7e-b9d1-bed957083aca)
 
 ### Parquet:
 
