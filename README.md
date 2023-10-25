@@ -1637,6 +1637,94 @@ val transformedRDD = inputRDD.map(customTransform)
 transformedRDD.collect().foreach(println)
 ```
 
+### More advanced sample for RDDs in Scala Spark with DataBricks
 
+Here are some more advanced Scala Spark RDD code snippets that involve more complex operations:
 
+### Pair RDD Operations:
 
+```scala
+// Read data from a text file into an RDD
+val textRDD = sc.textFile("dbfs:/path/to/textfile.txt")
+
+// Create a pair RDD of words with their counts
+val wordCountRDD = textRDD
+  .flatMap(line => line.split("\\s+"))
+  .map(word => (word, 1))
+  .reduceByKey(_ + _)
+
+// Find the word with the highest count
+val maxWord = wordCountRDD.max()(Ordering.by(_._2))
+
+// Display the word with the highest count
+println(s"Word with the highest count: ${maxWord._1}, Count: ${maxWord._2}")
+```
+
+**IMPORTANT NOTE**:
+
+This code is written in Scala and uses Apache Spark's Resilient Distributed Datasets (RDD) to perform word counting on a collection of text data.
+
+Let's break it down step by step:
+
+**textRDD**: This presumably represents an RDD (Resilient Distributed Dataset) containing lines of text.
+
+**flatMap(line => line.split("\\s+"))**: The flatMap operation is used to split each line of text into individual words. It takes each line, applies the split("\\s+") operation, which splits the line into words using whitespace as a delimiter, and then flattens the resulting sequences of words into a single sequence.
+
+**map(word => (word, 1))**: The map operation transforms each word into a key-value pair (word, 1). Here, word is the word itself, and 1 is an initial count assigned to each word.
+
+**reduceByKey(_ + _)**: This operation is used to aggregate the counts for each unique word. It groups the key-value pairs by the key (word) and then applies the provided function (_ + _), which adds up the counts for each word.
+
+So, in summary, the code processes a collection of text lines, splits them into words, assigns an initial count of 1 to each word, and then counts the occurrences of each unique word using the reduceByKey operation. 
+
+The result is a new RDD, wordCountRDD, where each word is paired with its count in the original text data.
+
+### Broadcast Variables:
+
+```scala
+// Define a broadcast variable
+val broadcastVar = sc.broadcast(Array(1, 2, 3))
+
+// Use the broadcast variable in a transformation
+val rdd = sc.parallelize(Array(4, 5, 6))
+val resultRDD = rdd.map(x => x + broadcastVar.value(0))
+
+// Display the result
+resultRDD.collect().foreach(println)
+```
+
+### Accumulators:
+
+```scala
+// Define an accumulator variable
+val accumulator = sc.accumulator(0)
+
+// Read data from a text file into an RDD and perform a transformation
+val textRDD = sc.textFile("dbfs:/path/to/textfile.txt")
+textRDD.foreach(line => accumulator += line.split("\\s+").length)
+
+// Display the total word count using the accumulator
+println(s"Total Word Count: ${accumulator.value}")
+```
+
+### Caching and Persistence:
+
+```scala
+Copy code
+// Read data from a text file into an RDD
+val textRDD = sc.textFile("dbfs:/path/to/textfile.txt")
+
+// Perform a series of transformations
+val transformedRDD = textRDD
+  .flatMap(line => line.split("\\s+"))
+  .map(word => (word, 1))
+  .reduceByKey(_ + _)
+
+// Persist the transformed RDD in memory
+transformedRDD.persist(StorageLevel.MEMORY_ONLY)
+
+// Perform an action
+val count = transformedRDD.count()
+println(s"Word Count: $count")
+```
+
+These examples showcase more advanced concepts such as pair RDD operations, broadcast variables, accumulators, and caching.
