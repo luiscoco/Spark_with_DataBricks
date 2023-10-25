@@ -924,21 +924,36 @@ outerJoinDF: org.apache.spark.sql.DataFrame = [Name: string, Value: int ... 1 mo
 
 # 3. Spark Types and Datasets
 
-. asdf
+## 3.1. Working with Common Spark Data Types
 
+
+## 3.2. Working with Complex Spark Data Types
+
+
+## 3.3. Managing Nulls in Data
+
+
+## 3.4. Type-Safe Data Processing: Datasets
+
+
+## 3.5. Datasets, Part 2 + Exercise
 
 
 
 # 4. Spark SQL
 
-.a asdf
+## 4.1. Spark as a "Database" with Spark SQL Shell
 
+## 4.2. Spark SQL
+
+## 4.3. Spark SQL: Exercises
 
 
 # 5. Low-Level Spark.
 
-.adfa
+## 5.1. RDDs
 
+## 5.2. RDDs, Part 2 + Exercises
 
 
 
