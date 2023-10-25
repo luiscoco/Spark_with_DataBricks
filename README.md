@@ -1070,6 +1070,24 @@ The Row class is used to represent each row of data, and we create an RDD (Resil
 
 The show() method is then used to display the contents of the DataFrame.
 
+```
+(3) Spark Jobs
+df:org.apache.spark.sql.DataFrame = [name: string, age: integer ... 6 more fields]
++-----+---+------+------+---------+------------+--------------------+-------------------+
+| name|age|salary|rating|isStudent|      grades|           gradesMap|          eventTime|
++-----+---+------+------+---------+------------+--------------------+-------------------+
+| John| 25| 50000|   4.5|     true|[90, 85, 92]|{Math -> 90, Engl...|2023-10-25 12:30:00|
+|Alice| 22| 60000|   4.8|    false|[95, 88, 94]|{Math -> 95, Engl...|2023-10-25 13:15:00|
++-----+---+------+------+---------+------------+--------------------+-------------------+
+
+import org.apache.spark.sql.{SparkSession, Row}
+import org.apache.spark.sql.types._
+spark: org.apache.spark.sql.SparkSession = org.apache.spark.sql.SparkSession@427114a9
+schema: org.apache.spark.sql.types.StructType = StructType(StructField(name,StringType,true),StructField(age,IntegerType,true),StructField(salary,LongType,true),StructField(rating,DoubleType,true),StructField(isStudent,BooleanType,true),StructField(grades,ArrayType(IntegerType,true),true),StructField(gradesMap,MapType(StringType,IntegerType,true),true),StructField(eventTime,TimestampType,true))
+data: Seq[org.apache.spark.sql.Row] = List([John,25,50000,4.5,true,List(90, 85, 92),Map(Math -> 90, English -> 85),2023-10-25 12:30:00.0], [Alice,22,60000,4.8,false,List(95, 88, 94),Map(Math -> 95, English -> 88),2023-10-25 13:15:00.0])
+df: org.apache.spark.sql.DataFrame = [name: string, age: int ... 6 more fields]
+```
+
 ## 3.2. Working with Complex Spark Data Types
 
 
