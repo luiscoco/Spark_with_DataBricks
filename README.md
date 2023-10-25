@@ -1236,6 +1236,63 @@ They include nested structures, arrays of structures, and MapType with nested st
 
 ## 3.3. Managing Nulls in Data
 
+Dealing with null values is an essential part of data processing, and Scala Spark in Databricks provides several ways to handle them. Here are some common techniques:
+
+### Dropping Null Values:
+
+drop method is used to eliminate rows with null values.
+
+```scala
+val dfWithoutNulls = originalDF.na.drop()
+````
+
+This removes any row containing at least one null value.
+
+### Filling Null Values:
+
+fill method can be used to replace null values with specific values.
+
+```scala
+val dfFilled = originalDF.na.fill("default_value")
+```
+
+Replace nulls with a default value.
+
+### Imputing Null Values:
+
+Imputation involves replacing null values with some calculated values, often the mean or median of the column.
+
+```scala
+val meanValue = originalDF.select(avg("column_name")).first()(0).asInstanceOf[Double]
+val dfImputed = originalDF.na.fill(meanValue, Seq("column_name"))
+```
+
+Replace nulls in a specific column with the mean value.
+
+### Handling Nulls in Conditions:
+
+You can use isNull or isNotNull functions for filtering based on null values.
+
+```scala
+val dfNotNull = originalDF.filter(col("column_name").isNotNull)
+```
+
+This keeps only the rows where a specific column is not null.
+
+### Coalesce:
+
+coalesce can be used to select the first non-null value from a set of columns.
+
+```scala
+Copy code
+val dfCoalesced = originalDF.withColumn("new_column", coalesce(col("column1"), col("column2")))
+```
+
+Create a new column with the first non-null value from two existing columns.
+
+Remember, the choice of method depends on the specific requirements of your data analysis. 
+
+You might need to use a combination of these techniques based on the nature of your data.
 
 ## 3.4. Type-Safe Data Processing: Datasets
 
