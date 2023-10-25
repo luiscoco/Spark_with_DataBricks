@@ -795,6 +795,8 @@ In Scala Spark with DataBricks, DataFrame joins are a common operation when you 
 
 There are several types of joins available, such as inner join, outer join, left join, and right join.
 
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/1cea81a1-499a-4fae-871f-498d8823ef99)
+
 Let's assume you have two DataFrames, df1 and df2, and you want to join them based on a common column, say "commonColumn".
 
 ### Inner Join:
