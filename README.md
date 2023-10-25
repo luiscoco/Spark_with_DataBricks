@@ -1090,6 +1090,73 @@ df: org.apache.spark.sql.DataFrame = [name: string, age: int ... 6 more fields]
 
 ## 3.2. Working with Complex Spark Data Types
 
+Spark provides support for complex data types, allowing you to work with nested and structured data in a distributed computing environment. 
+
+The most common complex data types in Spark are: StructType, StructField, ArrayType, MapType, and nested StructTypes.
+
+Let's start with **StructType** and **StructField**. 
+
+These are used to define a structure for your data, similar to a table schema. Here's an example:
+
+```scala
+import org.apache.spark.sql.types._
+
+// Define a schema with two fields: name and age
+val schema = StructType(Seq(
+  StructField("name", StringType, true),
+  StructField("age", IntegerType, true)
+))
+
+// Create a DataFrame with the defined schema
+val data = Seq(("John", 25), ("Jane", 30), ("Doe", null))
+val df = spark.createDataFrame(data).toDF("name", "age")
+
+// Apply the schema to the DataFrame
+val dfWithSchema = spark.createDataFrame(df.rdd, schema)
+
+dfWithSchema.show()
+```
+
+Next, let's look at **ArrayType**. This is used for representing arrays or lists in your data:
+
+```scala
+// Define a schema with an array of integers
+val arraySchema = StructType(Seq(
+  StructField("numbers", ArrayType(IntegerType, true), true)
+))
+
+// Create a DataFrame with the defined schema
+val arrayData = Seq((Seq(1, 2, 3)), (Seq(4, 5)), (null))
+val arrayDF = spark.createDataFrame(arrayData).toDF("numbers")
+
+// Apply the schema to the DataFrame
+val arrayDFWithSchema = spark.createDataFrame(arrayDF.rdd, arraySchema)
+
+arrayDFWithSchema.show()
+```
+
+Now, let's explore **MapType**, which is used to represent key-value pairs:
+
+```scala
+// Define a schema with a map of string keys and integer values
+val mapSchema = StructType(Seq(
+  StructField("info", MapType(StringType, IntegerType, true), true)
+))
+
+// Create a DataFrame with the defined schema
+val mapData = Seq((Map("score" -> 90, "rank" -> 1)), (Map("score" -> 85)), (null))
+val mapDF = spark.createDataFrame(mapData).toDF("info")
+
+// Apply the schema to the DataFrame
+val mapDFWithSchema = spark.createDataFrame(mapDF.rdd, mapSchema)
+
+mapDFWithSchema.show()
+```
+
+These examples showcase the use of complex data types in Spark DataFrames using Scala. 
+
+They provide a way to represent and work with structured and nested data efficiently in a distributed computing environment.
+
 
 ## 3.3. Managing Nulls in Data
 
