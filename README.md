@@ -558,7 +558,91 @@ These examples assume that you have a SparkSession named spark already created.
 
 ## 2.6. DataFrames Columns and Expressions
 
+In Apache Spark with Scala, DataFrames are a fundamental abstraction representing a distributed collection of data organized into named columns. 
+
+Spark DataFrames can be created from various data sources, and once created, you can perform operations on them using transformations and actions.
+
+### Creating a DataFrame:
+
+```scala
+// Import necessary libraries
+import org.apache.spark.sql.{SparkSession, DataFrame}
+
+// Create a Spark session
+val spark = SparkSession.builder.appName("example").getOrCreate()
+
+// Sample data
+val data = Seq(("Alice", 25), ("Bob", 30), ("Charlie", 22))
+
+// Define the schema for the DataFrame
+val schema = List("Name", "Age")
+
+// Create a DataFrame
+val df = spark.createDataFrame(data).toDF(schema: _*)
+```
+
+### Showing the DataFrame:
+
+```scala
+df.show()
+```
+
+### Selecting Columns:
+
+```scala
+// Selecting a single column
+val nameColumn = df("Name")
+
+// Selecting multiple columns
+val selectedColumns = df.select("Name", "Age")
+```
+
+### Adding a New Column:
+
+```scala
+Copy code
+// Adding a new column
+val updatedDF = df.withColumn("AgeAfter5Years", df("Age") + 5)
+```
+
+### Filtering Rows:
+
+```scala
+// Filtering based on a condition
+val filteredDF = df.filter(df("Age") > 25)
+```
+
+### Grouping and Aggregating:
+
+```scala
+// Grouping by a column and calculating the average
+val groupedDF = df.groupBy("Name").agg(avg("Age"))
+```
+
+### Joining DataFrames:
+
+```scala
+// Create another DataFrame
+val otherData = Seq(("Alice", "Engineer"), ("Bob", "Doctor"))
+val otherDF = spark.createDataFrame(otherData).toDF("Name", "Occupation")
+
+// Joining DataFrames
+val joinedDF = df.join(otherDF, "Name")
+```
+
+These are just some basic operations. 
+
+Spark supports a rich set of transformations and actions that you can perform on DataFrames. 
+
+DataFrames provide a high-level API that abstracts away many of the complexities of distributed processing.
+
+
+
 ## 2.7. DataFrames Columns and Expressions. Exercises
+
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/b4e90255-078f-4453-833b-e05e49d1c1bb)
+
+
 
 ## 2.8. DataFrame Aggregations
 
