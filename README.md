@@ -636,11 +636,27 @@ Spark supports a rich set of transformations and actions that you can perform on
 
 DataFrames provide a high-level API that abstracts away many of the complexities of distributed processing.
 
-
-
 ## 2.7. DataFrames Columns and Expressions. Exercises
 
 ![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/b4e90255-078f-4453-833b-e05e49d1c1bb)
+
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/c508bf8b-78fa-4050-8862-2ced4ad74260)
+
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/34e61242-2c85-476f-bd31-c7059445b78f)
+
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/df9a622d-0d61-4a9f-beed-cbc314219589)
+
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/576a58d2-af21-4227-bcb9-843042a8a842)
+
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/dd7cc6f1-4984-4b57-af8d-a013e6713ea4)
+
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/bfa45f5e-531b-4a2e-a3ed-26079e777ef9)
+
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/a6854971-119f-4dcc-aeb8-0fa2888f79f6)
+
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/073a3542-dcb4-4654-be2f-9c4396ebc14e)
+
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/055a98a6-0217-444e-816b-a98f0cbb80a5)
 
 
 
