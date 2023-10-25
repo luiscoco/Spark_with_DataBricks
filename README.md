@@ -868,7 +868,59 @@ outerJoinDF.show()
 
 ## 2.10. DataFrame Joins. Exercises
 
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/7219719a-ce9a-4ebc-8251-1795a69749d4)
 
+```
+(9) Spark Jobs
+df1:org.apache.spark.sql.DataFrame = [Name: string, Value: integer]
+df2:org.apache.spark.sql.DataFrame = [Name: string, Profession: string]
+innerJoinDF:org.apache.spark.sql.DataFrame = [Name: string, Value: integer ... 1 more field]
+leftJoinDF:org.apache.spark.sql.DataFrame = [Name: string, Value: integer ... 1 more field]
+rightJoinDF:org.apache.spark.sql.DataFrame = [Name: string, Value: integer ... 1 more field]
+outerJoinDF:org.apache.spark.sql.DataFrame = [Name: string, Value: integer ... 1 more field]
++-----+-----+----------+
+| Name|Value|Profession|
++-----+-----+----------+
+|Alice|    1|  Engineer|
+|  Bob|    2|    Doctor|
++-----+-----+----------+
+
++-------+-----+----------+
+|   Name|Value|Profession|
++-------+-----+----------+
+|  Alice|    1|  Engineer|
+|    Bob|    2|    Doctor|
+|Charlie|    3|      null|
++-------+-----+----------+
+
++-----+-----+----------+
+| Name|Value|Profession|
++-----+-----+----------+
+|Alice|    1|  Engineer|
+|  Bob|    2|    Doctor|
+|David| null|    Artist|
++-----+-----+----------+
+
++-------+-----+----------+
+|   Name|Value|Profession|
++-------+-----+----------+
+|  Alice|    1|  Engineer|
+|    Bob|    2|    Doctor|
+|Charlie|    3|      null|
+|  David| null|    Artist|
++-------+-----+----------+
+
+import org.apache.spark.sql.SparkSession
+spark: org.apache.spark.sql.SparkSession = org.apache.spark.sql.SparkSession@427114a9
+data1: Seq[(String, Int)] = List((Alice,1), (Bob,2), (Charlie,3))
+data2: Seq[(String, String)] = List((Alice,Engineer), (Bob,Doctor), (David,Artist))
+df1: org.apache.spark.sql.DataFrame = [Name: string, Value: int]
+df2: org.apache.spark.sql.DataFrame = [Name: string, Profession: string]
+innerJoinDF: org.apache.spark.sql.DataFrame = [Name: string, Value: int ... 1 more field]
+leftJoinDF: org.apache.spark.sql.DataFrame = [Name: string, Value: int ... 1 more field]
+rightJoinDF: org.apache.spark.sql.DataFrame = [Name: string, Value: int ... 1 more field]
+outerJoinDF: org.apache.spark.sql.DataFrame = [Name: string, Value: int ... 1 more field]
+```
 
 # 3. Spark Types and Datasets
 
