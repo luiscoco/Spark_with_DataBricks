@@ -779,7 +779,7 @@ countDF: org.apache.spark.sql.DataFrame = [Name: string, record_count: bigint]
 
 Ýou can also assign different salaries values to each row:
 
-´´´scala
+```scala
 // Adding a 'Salary' column with different values based on age
 val dfWithDifferentSalaries = df.withColumn(
   "Salary",
