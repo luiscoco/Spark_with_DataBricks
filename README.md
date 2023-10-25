@@ -1157,6 +1157,82 @@ These examples showcase the use of complex data types in Spark DataFrames using 
 
 They provide a way to represent and work with structured and nested data efficiently in a distributed computing environment.
 
+### More advanced examples using Spark's complex data types with Scala in a Databricks environment
+
+Nested Structures with **StructType**:
+
+```scala
+import org.apache.spark.sql.types._
+
+// Define a schema with nested structures
+val nestedSchema = StructType(Seq(
+  StructField("name", StringType, true),
+  StructField("age", IntegerType, true),
+  StructField("address", StructType(Seq(
+    StructField("city", StringType, true),
+    StructField("state", StringType, true)
+  )), true)
+))
+
+// Create a DataFrame with the defined schema
+val nestedData = Seq(("John", 25, ("San Francisco", "CA")), ("Jane", 30, ("New York", "NY")), (null, null, null))
+val nestedDF = spark.createDataFrame(nestedData).toDF("name", "age", "address")
+
+// Apply the schema to the DataFrame
+val nestedDFWithSchema = spark.createDataFrame(nestedDF.rdd, nestedSchema)
+
+nestedDFWithSchema.show()
+```
+
+**Arrays of StructType**:
+
+```scala
+Copy code
+// Define a schema with an array of structures
+val arrayOfStructSchema = StructType(Seq(
+  StructField("person", StringType, true),
+  StructField("contacts", ArrayType(StructType(Seq(
+    StructField("type", StringType, true),
+    StructField("number", StringType, true)
+  )), true), true)
+))
+
+// Create a DataFrame with the defined schema
+val arrayOfStructData = Seq(("John", Seq(("email", "john@example.com"), ("phone", "123-456-7890"))), 
+                            ("Jane", Seq(("email", "jane@example.com"))))
+val arrayOfStructDF = spark.createDataFrame(arrayOfStructData).toDF("person", "contacts")
+
+// Apply the schema to the DataFrame
+val arrayOfStructDFWithSchema = spark.createDataFrame(arrayOfStructDF.rdd, arrayOfStructSchema)
+
+arrayOfStructDFWithSchema.show()
+```
+
+**MapType** with Nested Structures:
+
+```scala
+// Define a schema with a map of string keys and nested structures as values
+val mapOfStructSchema = StructType(Seq(
+  StructField("attributes", MapType(StringType, StructType(Seq(
+    StructField("value", StringType, true),
+    StructField("unit", StringType, true)
+  )), true), true)
+))
+
+// Create a DataFrame with the defined schema
+val mapOfStructData = Seq((Map("height" -> ("5.8", "feet"), "weight" -> ("150", "lbs"))), 
+                          (Map("height" -> ("5.5", "feet"))))
+val mapOfStructDF = spark.createDataFrame(mapOfStructData).toDF("attributes")
+
+// Apply the schema to the DataFrame
+val mapOfStructDFWithSchema = spark.createDataFrame(mapOfStructDF.rdd, mapOfStructSchema)
+
+mapOfStructDFWithSchema.show()
+```
+
+These examples demonstrate more advanced use cases of complex data types in Spark DataFrames. 
+
+They include nested structures, arrays of structures, and MapType with nested structures as values, providing flexibility to handle diverse data scenarios in distributed computing environments.
 
 ## 3.3. Managing Nulls in Data
 
