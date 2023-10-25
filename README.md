@@ -1637,7 +1637,7 @@ val transformedRDD = inputRDD.map(customTransform)
 transformedRDD.collect().foreach(println)
 ```
 
-### More advanced sample for RDDs in Scala Spark with DataBricks
+## 5.2. More advanced sample for RDDs in Scala Spark with DataBricks
 
 Here are some more advanced Scala Spark RDD code snippets that involve more complex operations:
 
