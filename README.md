@@ -926,6 +926,149 @@ outerJoinDF: org.apache.spark.sql.DataFrame = [Name: string, Value: int ... 1 mo
 
 ## 3.1. Working with Common Spark Data Types
 
+Let's dive into the common Spark Data Types in Scala using DataFrames in Apache Spark with DataBricks. 
+
+Spark DataFrames are built on top of the Spark SQL engine, and they provide a distributed collection of data organized into named columns.
+
+Here are some common Spark Data Types and examples using Scala with DataFrames:
+
+### 1. StringType:
+
+Represents strings of characters. In Scala, it's represented as StringType.
+
+```scala
+import org.apache.spark.sql.types._
+
+val schema = StructType(Seq(StructField("name", StringType, true)))
+```
+
+### 2. IntegerType:
+
+Represents 32-bit signed integers. In Scala, it's represented as IntegerType.
+
+```scala
+import org.apache.spark.sql.types._
+
+val schema = StructType(Seq(StructField("age", IntegerType, true)))
+```
+
+### 3. LongType:
+
+Represents 64-bit signed integers. In Scala, it's represented as LongType.
+
+```scala
+import org.apache.spark.sql.types._
+
+val schema = StructType(Seq(StructField("salary", LongType, true)))
+```
+
+### 4. DoubleType:
+
+Represents 64-bit double-precision floating-point numbers. In Scala, it's represented as DoubleType.
+
+```scala
+import org.apache.spark.sql.types._
+
+val schema = StructType(Seq(StructField("rating", DoubleType, true)))
+```
+
+### 5. BooleanType:
+
+Represents boolean values true or false. In Scala, it's represented as BooleanType.
+
+```scala
+import org.apache.spark.sql.types._
+
+val schema = StructType(Seq(StructField("isStudent", BooleanType, true)))
+```
+
+### 6. ArrayType:
+
+Represents arrays of elements. In Scala, it's represented as ArrayType.
+
+```scala
+import org.apache.spark.sql.types._
+
+val schema = StructType(Seq(StructField("grades", ArrayType(IntegerType), true)))
+```
+
+### 7. MapType:
+
+Represents key-value pairs. In Scala, it's represented as MapType.
+
+```scala
+import org.apache.spark.sql.types._
+
+val schema = StructType(Seq(StructField("gradesMap", MapType(StringType, IntegerType), true)))
+```
+
+### 8. StructType:
+
+Represents a structure or a record. In Scala, it's represented as StructType.
+
+```scala
+import org.apache.spark.sql.types._
+
+val schema = StructType(Seq(
+  StructField("name", StringType, true),
+  StructField("age", IntegerType, true)
+))
+```
+
+### 9. TimestampType:
+
+Represents a timestamp with a time zone. In Scala, it's represented as TimestampType.
+
+```scala
+import org.apache.spark.sql.types._
+
+val schema = StructType(Seq(StructField("eventTime", TimestampType, true)))
+```
+
+These examples demonstrate the basic usage of common Spark Data Types in Scala using DataFrames. 
+
+You can use these types to define the schema of your DataFrames when working with Spark.
+
+### Data Types example
+Let's include examples of how to create DataFrames based on the specified schema and populate them with data.
+
+```scala
+import org.apache.spark.sql.{SparkSession, Row}
+import org.apache.spark.sql.types._
+
+// Create a Spark session
+val spark = SparkSession.builder.appName("SparkExample").getOrCreate()
+
+// Define the schema
+val schema = StructType(Seq(
+  StructField("name", StringType, true),
+  StructField("age", IntegerType, true),
+  StructField("salary", LongType, true),
+  StructField("rating", DoubleType, true),
+  StructField("isStudent", BooleanType, true),
+  StructField("grades", ArrayType(IntegerType), true),
+  StructField("gradesMap", MapType(StringType, IntegerType), true),
+  StructField("eventTime", TimestampType, true)
+))
+
+// Create a DataFrame with the specified schema
+val data = Seq(
+  Row("John", 25, 50000L, 4.5, true, Seq(90, 85, 92), Map("Math" -> 90, "English" -> 85), java.sql.Timestamp.valueOf("2023-10-25 12:30:00")),
+  Row("Alice", 22, 60000L, 4.8, false, Seq(95, 88, 94), Map("Math" -> 95, "English" -> 88), java.sql.Timestamp.valueOf("2023-10-25 13:15:00"))
+)
+
+// Create the DataFrame
+val df = spark.createDataFrame(spark.sparkContext.parallelize(data), schema)
+
+// Show the DataFrame
+df.show()
+```
+
+In this example, we first define the schema using StructType and then create a DataFrame (df) using the createDataFrame method. 
+
+The Row class is used to represent each row of data, and we create an RDD (Resilient Distributed Dataset) from a sequence of rows. 
+
+The show() method is then used to display the contents of the DataFrame.
 
 ## 3.2. Working with Complex Spark Data Types
 
