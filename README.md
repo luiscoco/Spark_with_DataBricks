@@ -777,6 +777,18 @@ rankDF: org.apache.spark.sql.DataFrame = [Name: string, Age: int ... 2 more fiel
 countDF: org.apache.spark.sql.DataFrame = [Name: string, record_count: bigint]
 ```
 
+Ýou can also assign different salaries values to each row:
+
+´´´scala
+// Adding a 'Salary' column with different values based on age
+val dfWithDifferentSalaries = df.withColumn(
+  "Salary",
+  when(col("Age") < 25, lit(45000))
+    .when(col("Age") >= 25 && col("Age") < 30, lit(55000))
+    .otherwise(lit(60000)) // Default salary for other cases
+)
+```
+
 ## 2.9. DataFrame Joins
 
 ## 2.10. DataFrame Joins. Exercises
