@@ -1358,6 +1358,63 @@ val dfExploded = originalDF.select("column_name", explode(col("nested_array")).a
 
 This example explodes an array column into separate rows.
 
+```scala
+%scala
+import org.apache.spark.sql.{SparkSession, DataFrame}
+import org.apache.spark.sql.functions._
+
+// Create a Spark session
+val spark = SparkSession.builder
+  .appName("Explode Example")
+  .master("local[2]")  // Use local mode for simplicity
+  .getOrCreate()
+
+// Create a sample DataFrame
+val data = Seq(
+  ("A", Seq(1, 2, 3)),
+  ("B", Seq(4, 5)),
+  ("C", Seq(6))
+)
+
+// Define the schema
+val schema = List("column_name", "nested_array")
+
+// Create the originalDF
+val originalDF: DataFrame = spark.createDataFrame(data).toDF(schema: _*)
+
+// Show the original DataFrame
+originalDF.show()
+
+// Apply explode to create dfExploded
+val dfExploded: DataFrame = originalDF.select(col("column_name"), explode(col("nested_array")).as("exploded_column"))
+
+// Show the exploded DataFrame
+dfExploded.show()
+```
+
+This is the output in DataBricks
+
+```
++-----------+------------+
+|column_name|nested_array|
++-----------+------------+
+|          A|   [1, 2, 3]|
+|          B|      [4, 5]|
+|          C|         [6]|
++-----------+------------+
+
++-----------+---------------+
+|column_name|exploded_column|
++-----------+---------------+
+|          A|              1|
+|          A|              2|
+|          A|              3|
+|          B|              4|
+|          B|              5|
+|          C|              6|
++-----------+---------------+
+```
+
 ## 3.4. Type-Safe Data Processing: Datasets
 
 
