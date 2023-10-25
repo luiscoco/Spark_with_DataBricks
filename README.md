@@ -658,9 +658,124 @@ DataFrames provide a high-level API that abstracts away many of the complexities
 
 ![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/055a98a6-0217-444e-816b-a98f0cbb80a5)
 
-
-
 ## 2.8. DataFrame Aggregations
+
+I'd be happy to help you with DataFrame aggregations in Scala using Apache Spark in Databricks! 
+
+DataFrame aggregations involve grouping data based on one or more columns and then performing some aggregate functions on the grouped data.
+
+Let's say you have a DataFrame called df with columns name, age, and salary.
+
+```scala
+// Import necessary Spark libraries
+import org.apache.spark.sql.functions._
+import org.apache.spark.sql.expressions.Window
+
+// Assuming you already have a DataFrame called df
+// If not, you can read data into a DataFrame using spark.read
+
+// Adding a 'Salary' column with sample values
+val dfWithSalary = df.withColumn("Salary", lit(50000)) // You can replace 50000 with your desired salary value
+
+// Display the DataFrame with the added 'Salary' column
+dfWithSalary.show()
+
+// 1. Group by 'Name' and calculate the average salary
+val avgSalaryDF = dfWithSalary.groupBy("Name").agg(avg("Salary").as("average_salary"))
+
+// Display the result
+avgSalaryDF.show()
+
+// 2. Group by 'Age' and get the maximum salary
+val maxSalaryDF = dfWithSalary.groupBy("Age").agg(max("Salary").as("max_salary"))
+
+// Display the result
+maxSalaryDF.show()
+
+// 3. Use Window functions to calculate the rank based on salary
+val windowSpec = Window.orderBy(desc("Salary"))
+val rankDF = dfWithSalary.withColumn("rank", rank().over(windowSpec))
+
+// Display the result
+rankDF.show()
+
+// 4. Group by 'Name' and get the count of records for each name
+val countDF = dfWithSalary.groupBy("Name").agg(count("*").as("record_count"))
+
+// Display the result
+countDF.show()
+```
+
+In this example:
+
+groupBy is used to specify the columns for grouping.
+
+agg is used to perform aggregate functions like avg, max, count, etc.
+
+Window functions (like rank in this case) are used for operations that involve sorting and ranking within partitions.
+
+Remember to adjust column names and aggregation functions based on your actual DataFrame structure and requirements.
+
+## 2.8. DataFrame Aggregations. Exercises
+
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/1c6a4c04-ea77-48df-94d7-6606f8cf14de)
+
+```
+(8) Spark Jobs
+dfWithSalary:org.apache.spark.sql.DataFrame = [Name: string, Age: integer ... 1 more field]
+avgSalaryDF:org.apache.spark.sql.DataFrame = [Name: string, average_salary: double]
+maxSalaryDF:org.apache.spark.sql.DataFrame = [Age: integer, max_salary: integer]
+rankDF:org.apache.spark.sql.DataFrame = [Name: string, Age: integer ... 2 more fields]
+countDF:org.apache.spark.sql.DataFrame = [Name: string, record_count: long]
++-------+---+------+
+|   Name|Age|Salary|
++-------+---+------+
+|  Alice| 25| 50000|
+|    Bob| 30| 50000|
+|Charlie| 22| 50000|
++-------+---+------+
+
++-------+--------------+
+|   Name|average_salary|
++-------+--------------+
+|  Alice|       50000.0|
+|    Bob|       50000.0|
+|Charlie|       50000.0|
++-------+--------------+
+
++---+----------+
+|Age|max_salary|
++---+----------+
+| 25|     50000|
+| 30|     50000|
+| 22|     50000|
++---+----------+
+
++-------+---+------+----+
+|   Name|Age|Salary|rank|
++-------+---+------+----+
+|  Alice| 25| 50000|   1|
+|    Bob| 30| 50000|   1|
+|Charlie| 22| 50000|   1|
++-------+---+------+----+
+
++-------+------------+
+|   Name|record_count|
++-------+------------+
+|  Alice|           1|
+|    Bob|           1|
+|Charlie|           1|
++-------+------------+
+
+import org.apache.spark.sql.functions._
+import org.apache.spark.sql.expressions.Window
+dfWithSalary: org.apache.spark.sql.DataFrame = [Name: string, Age: int ... 1 more field]
+avgSalaryDF: org.apache.spark.sql.DataFrame = [Name: string, average_salary: double]
+maxSalaryDF: org.apache.spark.sql.DataFrame = [Age: int, max_salary: int]
+windowSpec: org.apache.spark.sql.expressions.WindowSpec = org.apache.spark.sql.expressions.WindowSpec@6841f603
+rankDF: org.apache.spark.sql.DataFrame = [Name: string, Age: int ... 2 more fields]
+countDF: org.apache.spark.sql.DataFrame = [Name: string, record_count: bigint]
+```
 
 ## 2.9. DataFrame Joins
 
