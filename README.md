@@ -1294,6 +1294,70 @@ Remember, the choice of method depends on the specific requirements of your data
 
 You might need to use a combination of these techniques based on the nature of your data.
 
+## More advanced topics related to managing nulls in Scala Spark on Databricks
+
+### User-Defined Functions (UDFs):
+
+Sometimes, you may need a more complex logic to fill or transform null values.
+
+In such cases, you can define your own functions using udf:
+
+```scala
+import org.apache.spark.sql.functions.udf
+
+val customFill = udf((value: String) => if (value == null) "custom_value" else value)
+
+val dfCustomFilled = originalDF.withColumn("new_column", customFill(col("column_name")))
+```
+
+This allows you to apply custom logic when filling or transforming nulls.
+
+### Handling Nulls in Window Functions:
+
+When working with window functions, null values can impact the results. You can use the ignoreNulls option to handle them:
+
+```scala
+import org.apache.spark.sql.expressions.Window
+
+val windowSpec = Window.partitionBy("partition_column").orderBy("order_column")
+
+val dfWithRank = originalDF.withColumn("rank", rank().over(windowSpec).ignoreNulls())
+```
+
+This example uses the rank window function, and ignoreNulls helps in handling nulls gracefully.
+
+### Handling Nulls in Machine Learning Pipelines:
+
+Dealing with nulls in feature columns is crucial for machine learning.
+
+Spark ML provides a Imputer transformer to fill null values in feature columns:
+
+```scala
+import org.apache.spark.ml.feature.Imputer
+
+val imputer = new Imputer()
+  .setInputCols(Array("feature_column1", "feature_column2"))
+  .setOutputCols(Array("imputed_feature_column1", "imputed_feature_column2"))
+  .setStrategy("mean")
+
+val model = imputer.fit(originalDF)
+val dfImputedFeatures = model.transform(originalDF)
+```
+
+This is particularly useful when preparing data for machine learning models.
+
+### Handling Nested Data Structures:
+
+If your DataFrame contains nested structures like arrays or maps, handling nulls can be more intricate. 
+
+Spark provides functions like explode, inline, and getItem for working with such structures.
+
+```scala
+val dfExploded = originalDF.select("column_name", explode(col("nested_array")).as("exploded_column"))
+```
+
+This example explodes an array column into separate rows.
+
 ## 3.4. Type-Safe Data Processing: Datasets
 
 
