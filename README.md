@@ -1569,7 +1569,73 @@ In practice, DataFrames and Datasets are often preferred for structured data pro
 
 ## 5.2. RDDs, Part 2 + Exercises
 
+Here are a few more Scala Spark RDD code snippets that you can use in Databricks:
 
+### Reading and Processing Text File:
+
+```scala
+// Read data from a text file into an RDD
+val textRDD = sc.textFile("dbfs:/path/to/textfile.txt")
+
+// Perform transformations
+val wordCountRDD = textRDD
+  .flatMap(line => line.split("\\s+"))
+  .map(word => (word, 1))
+  .reduceByKey(_ + _)
+
+// Display the word count
+wordCountRDD.collect().foreach(println)
+```
+
+### Filtering and Transformation:
+
+```scala
+// Read data from a CSV file into an RDD
+val csvRDD = sc.textFile("dbfs:/path/to/data.csv")
+
+// Filter and transform data
+val filteredRDD = csvRDD
+  .filter(line => line.contains("filterCondition"))
+  .map(line => line.split(","))
+  .map(array => (array(0), array(1).toInt)) // Assuming the first and second columns are string and integer
+
+// Display the filtered data
+filteredRDD.collect().foreach(println)
+```
+
+### Joining Two RDDs:
+
+```scala
+// Read data from two text files into RDDs
+val rdd1 = sc.textFile("dbfs:/path/to/data1.txt").map(line => (line.split(",")(0), line.split(",")(1)))
+val rdd2 = sc.textFile("dbfs:/path/to/data2.txt").map(line => (line.split(",")(0), line.split(",")(2)))
+
+// Perform inner join
+val joinedRDD = rdd1.join(rdd2)
+
+// Display the joined data
+joinedRDD.collect().foreach(println)
+```
+
+### Custom Transformation:
+
+```scala
+// Read data from a text file into an RDD
+val inputRDD = sc.textFile("dbfs:/path/to/input.txt")
+
+// Define a custom transformation function
+def customTransform(line: String): String = {
+  // Your custom logic here
+  // This example converts the line to uppercase
+  line.toUpperCase()
+}
+
+// Apply the custom transformation
+val transformedRDD = inputRDD.map(customTransform)
+
+// Display the transformed data
+transformedRDD.collect().foreach(println)
+```
 
 
 
