@@ -791,6 +791,79 @@ val dfWithDifferentSalaries = df.withColumn(
 
 ## 2.9. DataFrame Joins
 
+In Scala Spark with DataBricks, DataFrame joins are a common operation when you want to combine two DataFrames based on a common column. 
+
+There are several types of joins available, such as inner join, outer join, left join, and right join.
+
+Let's assume you have two DataFrames, df1 and df2, and you want to join them based on a common column, say "commonColumn".
+
+### Inner Join:
+
+An inner join returns only the rows where there is a match in both DataFrames.
+
+```scala
+val resultDF = df1.join(df2, "commonColumn")
+````
+
+### Left Join:
+
+A left join returns all the rows from the left DataFrame (df1) and the matched rows from the right DataFrame (df2). 
+
+If there is no match, it fills with null values.
+
+```scala
+val resultDF = df1.join(df2, Seq("commonColumn"), "left")
+```
+
+### Right Join:
+
+A right join returns all the rows from the right DataFrame (df2) and the matched rows from the left DataFrame (df1). 
+
+If there is no match, it fills with null values.
+
+```scala
+val resultDF = df1.join(df2, Seq("commonColumn"), "right")
+```
+
+### Outer Join (Full Outer Join):
+
+An outer join returns all the rows when there is a match in either the left or right DataFrame. If there is no match, it fills with null values.
+
+```scala
+val resultDF = df1.join(df2, Seq("commonColumn"), "outer")
+```
+
+Here's a simple example with some random data:
+
+```scala
+import org.apache.spark.sql.SparkSession
+
+val spark = SparkSession.builder().appName("DataFrameJoinsExample").getOrCreate()
+
+// Sample DataFrames
+val data1 = Seq(("Alice", 1), ("Bob", 2), ("Charlie", 3))
+val data2 = Seq(("Alice", "Engineer"), ("Bob", "Doctor"), ("David", "Artist"))
+
+val df1 = spark.createDataFrame(data1).toDF("Name", "Value")
+val df2 = spark.createDataFrame(data2).toDF("Name", "Profession")
+
+// Inner Join
+val innerJoinDF = df1.join(df2, "Name")
+innerJoinDF.show()
+
+// Left Join
+val leftJoinDF = df1.join(df2, Seq("Name"), "left")
+leftJoinDF.show()
+
+// Right Join
+val rightJoinDF = df1.join(df2, Seq("Name"), "right")
+rightJoinDF.show()
+
+// Outer Join
+val outerJoinDF = df1.join(df2, Seq("Name"), "outer")
+outerJoinDF.show()
+```
+
 ## 2.10. DataFrame Joins. Exercises
 
 
