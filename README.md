@@ -1294,7 +1294,7 @@ Remember, the choice of method depends on the specific requirements of your data
 
 You might need to use a combination of these techniques based on the nature of your data.
 
-## More advanced topics related to managing nulls in Scala Spark on Databricks
+## 3.3. More advanced topics related to managing nulls in Scala Spark on Databricks
 
 ### User-Defined Functions (UDFs):
 
