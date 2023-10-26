@@ -2181,8 +2181,66 @@ Save the processed data, for example, as a Parquet file.
 finalResult.write.parquet("/path/to/output")
 ```
 
-## 4.3. Spark SQL: Exercises
+## 4.3. Spark SQL More Advanced Samples
 
+### 1. Window Functions:
+
+Window functions allow you to perform calculations across a specified range of rows related to the current row.
+
+```scala
+import org.apache.spark.sql.expressions.Window
+import org.apache.spark.sql.functions._
+
+// Define a window specification
+val windowSpec = Window.partitionBy("department").orderBy("salary")
+
+// Calculate the rank within each department based on salary
+val rankColumn = rank().over(windowSpec)
+
+// Apply the window function to the DataFrame
+val rankedDF = df.withColumn("rank", rankColumn)
+```
+
+### 2. User-Defined Functions (UDFs):
+
+You can define your own functions and use them in Spark SQL.
+
+```scala
+// Define a UDF
+val squared: Double => Double = (x: Double) => x * x
+val squaredUDF = udf(squared)
+
+// Apply the UDF in a SQL query
+val result = spark.sql("SELECT name, age, squaredUDF(salary) as squaredSalary FROM people")
+```
+
+### 3. Working with Nested Data:
+
+If your data has nested structures, you can use Spark SQL to query and manipulate them.
+
+```scala
+// Assume the DataFrame has a column named "address" which is a struct
+// Extract values from the nested struct
+val result = spark.sql("SELECT name, age, address.city FROM people")
+```
+
+### 4. Temporal Data and Date Functions:
+
+Spark SQL provides functions for working with temporal data.
+
+```scala
+// Calculate age based on birthdate
+val result = spark.sql("SELECT name, birthdate, DATEDIFF(current_date(), birthdate) as age FROM people")
+```
+
+### 5. Subqueries:
+
+You can use subqueries for more complex analyses.
+
+```scala
+val subquery = spark.sql("SELECT department, AVG(salary) as avgSalary FROM people GROUP BY department")
+val result = spark.sql("SELECT name, department, salary, subquery.avgSalary FROM people JOIN subquery ON people.department = subquery.department")
+```
 
 # 5. Low-Level Spark.
 
