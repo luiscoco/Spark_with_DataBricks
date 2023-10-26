@@ -10,6 +10,8 @@ https://community.cloud.databricks.com/
 
 ## 1.2. Scala Recap
 
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/2ac88de7-4364-4277-b2af-6b3d9ede058e)
+
 ```scala
 import scala.concurrent.{ExecutionContext, Future}
 import scala.util.{Failure, Success}
