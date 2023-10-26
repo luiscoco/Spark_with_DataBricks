@@ -2126,6 +2126,61 @@ Datasets can be used with both Java and Scala, but the type safety is particular
 
 ## 4.2. Spark SQL
 
+Spark SQL is a Spark module for structured data processing that provides a programming interface for data manipulation using SQL queries. 
+
+Databricks is a cloud-based platform built on top of Apache Spark, which simplifies big data analytics.
+
+### 1. Create a DataFrame:
+
+You can create a DataFrame from a data source like a CSV file or a Parquet file.
+
+```scala
+// Read CSV into a DataFrame
+val df = spark.read
+  .option("header", true)
+  .option("inferSchema", true)
+  .csv("/path/to/data.csv")
+```
+
+### 2. Create a temporary table:
+
+Register the DataFrame as a temporary table.
+
+```scala
+// Register the DataFrame as a temporary table
+df.createOrReplaceTempView("people")
+```
+
+### 3. Run SQL queries:
+
+Execute SQL queries on the temporary table.
+
+```scala
+// Run a SQL query
+val result = spark.sql("SELECT * FROM people")
+```
+
+### 4. Perform operations with DataFrame API and SQL:
+
+Combine SQL queries with DataFrame operations.
+
+```scala
+// Use SQL to filter data
+val filteredData = spark.sql("SELECT * FROM people WHERE age > 25")
+
+// Use DataFrame API to perform additional transformations
+val finalResult = filteredData.groupBy("name").agg(avg("age"))
+```
+
+### 5. Save the result:
+
+Save the processed data, for example, as a Parquet file.
+
+```scala
+// Save the result as a Parquet file
+finalResult.write.parquet("/path/to/output")
+```
+
 ## 4.3. Spark SQL: Exercises
 
 
