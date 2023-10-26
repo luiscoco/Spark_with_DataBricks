@@ -1653,10 +1653,100 @@ This is the output in DataBricks
 
 ## 3.4. Type-Safe Data Processing: Datasets
 
+In Apache Spark, a Dataset is a distributed collection of data that provides a higher-level API than RDDs (Resilient Distributed Datasets) and allows for strong typing. 
 
-## 3.5. Datasets, Part 2 + Exercise
+Datasets are available in Scala and Java and offer the benefits of both DataFrames and RDDs.
 
+Here's a brief overview of Datasets in Scala Spark with Databricks:
 
+### Creation of Dataset:
+
+You can create a Dataset from a DataFrame or by loading data from external sources like a Parquet file, JSON file, etc.
+
+```scala
+// Creating a Dataset from a DataFrame
+val datasetFromDataFrame = dataFrame.as[YourCaseClass]
+
+// Loading data directly into a Dataset
+val dataset = spark.read.json("path/to/json/file").as[YourCaseClass]
+```
+
+### Typed API:
+
+One of the main advantages of Datasets is the ability to use a typed API. This means that you can work with strongly-typed Scala objects instead of relying on untyped Row objects.
+
+```scala
+// Define a case class to represent your data structure
+case class YourCaseClass(name: String, age: Int)
+
+// Use the Dataset with the typed API
+val result = dataset.filter(_.age > 21).groupBy("name").agg(avg("age"))
+```
+
+### Performance:
+
+Datasets provide better performance optimizations compared to RDDs or DataFrames due to the use of Spark's Tungsten execution engine. 
+
+The strong typing also allows for better compile-time type checking.
+
+### Compatibility with DataFrame API:
+
+Datasets are interoperable with the DataFrame API, so you can seamlessly switch between the two. 
+
+You can convert a Dataset to a DataFrame and vice versa.
+
+```scala
+val df = dataset.toDF()
+```
+
+### Encoders:
+
+Datasets use encoders to convert between JVM objects and Spark SQL's internal binary format. 
+
+Spark provides encoders for most common types, and you can also create custom encoders for your specific types.
+
+```scala
+// Implicit encoder for case class
+import org.apache.spark.sql.Encoders
+implicit val yourEncoder = Encoders.product[YourCaseClass]
+```
+
+In Databricks, which is a cloud-based platform for big data analytics built on top of Apache Spark, you can work with Datasets in a collaborative environment. 
+
+You can create notebooks, develop and test code, and visualize data using Databricks' features. 
+
+The integration is seamless, and you can take advantage of Databricks clusters for distributed computing.
+
+## 3.5. Datasets Exercise
+
+```scala
+// Define the case class representing your data
+case class Person(id: Int, name: String, age: Int)
+
+// Sample data
+val peopleData = Seq(
+  Person(1, "Alice", 25),
+  Person(2, "Bob", 30),
+  Person(3, "Charlie", 22)
+)
+
+// Create a Dataset from the Seq
+val peopleDS = spark.createDataset(peopleData)
+
+// Show the contents of the Dataset
+display(peopleDS.toDF())
+
+// Perform operations on the Dataset as needed
+// For example, filter people over the age of 25
+val filteredPeople = peopleDS.filter(person => person.age > 25)
+
+// Show the filtered Dataset
+display(filteredPeople.toDF())
+```
+
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/9317d258-188f-4250-8cd0-87f5f785a16f)
+
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/e7cd7c5c-d461-4801-80dc-bc63d4c3f253)
 
 # 4. Spark SQL
 
