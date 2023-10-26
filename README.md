@@ -1748,6 +1748,172 @@ display(filteredPeople.toDF())
 
 ![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/e7cd7c5c-d461-4801-80dc-bc63d4c3f253)
 
+### More DataSet operations samples
+
+```scala
+import org.apache.spark.sql.functions._
+import org.apache.spark.sql.Dataset
+
+// Define the case class
+case class Person(name: String, age: Int, city: String)
+case class Address(city: String, state: String)
+
+// Sample data
+val data = Seq(
+  Person("John", 25, "New York"),
+  Person("Alice", 30, "San Francisco"),
+  Person("Bob", 28, "New York")
+)
+
+val addressData = Seq(
+  Address("New York", "NY"),
+  Address("San Francisco", "CA")
+)
+
+// Create Datasets
+val personDataset: Dataset[Person] = data.toDS()
+val addressDataset: Dataset[Address] = addressData.toDS()
+
+// Display initial data
+println("Initial Data:")
+personDataset.show()
+
+// Filtering
+val filteredData = personDataset.filter(person => person.age > 25)
+println("Filtered Data:")
+filteredData.show()
+
+// Mapping/Transforming
+val transformedData = personDataset.map(person => Person(person.name.toUpperCase, person.age, person.city))
+println("Transformed Data:")
+transformedData.show()
+
+// Grouping and Aggregation
+val result = personDataset.groupBy("city").agg(avg("age"), max("age"))
+println("Aggregated Result:")
+result.show()
+
+// Joining
+val joinedData = personDataset.join(addressDataset, "city")
+println("Joined Data:")
+joinedData.show()
+
+// Sorting
+val sortedData = personDataset.sort(asc("age"))
+println("Sorted Data:")
+sortedData.show()
+
+// Selecting Columns
+val selectedData = personDataset.select("name", "age")
+println("Selected Columns:")
+selectedData.show()
+
+// Distinct Values
+val distinctData = personDataset.distinct()
+println("Distinct Data:")
+distinctData.show()
+
+// Caching
+personDataset.cache()
+println("Data Cached")
+
+// Counting
+val count = personDataset.count()
+println(s"Count: $count")
+
+// Display final cached data
+println("Final Cached Data:")
+personDataset.show()
+
+// Stop the Spark Session
+spark.stop()
+```
+
+This is the output for the above code:
+
+```
+Initial Data:
++-----+---+-------------+
+| name|age|         city|
++-----+---+-------------+
+| John| 25|     New York|
+|Alice| 30|San Francisco|
+|  Bob| 28|     New York|
++-----+---+-------------+
+
+Filtered Data:
++-----+---+-------------+
+| name|age|         city|
++-----+---+-------------+
+|Alice| 30|San Francisco|
+|  Bob| 28|     New York|
++-----+---+-------------+
+
+Transformed Data:
++-----+---+-------------+
+| name|age|         city|
++-----+---+-------------+
+| JOHN| 25|     New York|
+|ALICE| 30|San Francisco|
+|  BOB| 28|     New York|
++-----+---+-------------+
+
+Aggregated Result:
++-------------+--------+--------+
+|         city|avg(age)|max(age)|
++-------------+--------+--------+
+|     New York|    26.5|      28|
+|San Francisco|    30.0|      30|
++-------------+--------+--------+
+
+Joined Data:
++-------------+-----+---+-----+
+|         city| name|age|state|
++-------------+-----+---+-----+
+|     New York| John| 25|   NY|
+|San Francisco|Alice| 30|   CA|
+|     New York|  Bob| 28|   NY|
++-------------+-----+---+-----+
+
+Sorted Data:
++-----+---+-------------+
+| name|age|         city|
++-----+---+-------------+
+| John| 25|     New York|
+|  Bob| 28|     New York|
+|Alice| 30|San Francisco|
++-----+---+-------------+
+
+Selected Columns:
++-----+---+
+| name|age|
++-----+---+
+| John| 25|
+|Alice| 30|
+|  Bob| 28|
++-----+---+
+
+Distinct Data:
++-----+---+-------------+
+| name|age|         city|
++-----+---+-------------+
+| John| 25|     New York|
+|Alice| 30|San Francisco|
+|  Bob| 28|     New York|
++-----+---+-------------+
+
+Data Cached
+Count: 3
+Final Cached Data:
++-----+---+-------------+
+| name|age|         city|
++-----+---+-------------+
+| John| 25|     New York|
+|Alice| 30|San Francisco|
+|  Bob| 28|     New York|
++-----+---+-------------+
+```
+
 # 4. Spark SQL
 
 ## 4.1. Spark as a "Database" with Spark SQL Shell
