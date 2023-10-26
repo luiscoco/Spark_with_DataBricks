@@ -672,6 +672,11 @@ We drag and drop the CSV file to be uploaded to DataBricks
 ![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/67e0a0b5-5c1e-48c3-94af-f09dde2145b0)
 
 ![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/23e9f550-9f95-4423-80a6-94f0c7f2b2ed)
+
+Finally, we execute the scala code in the DataBricks Notebook
+
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/66a6b023-e418-4ef2-ba30-ece86d8d7a3d)
+
 ### JSON:
 
 ```scala
