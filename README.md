@@ -12,6 +12,46 @@ https://community.cloud.databricks.com/
 
 ## 1.3. Spark First Principles
 
+### What Spark is?
+
+Unified computing engine and libraries for ditributed data processing.
+
+### Unified computing engine
+
+Spark supports a variety of data processing tasks: data loading, SQL queries, machine learning, streaming.
+
+Unified: consistent, composable APIs in multiple languages, optimizations across different libraries.
+
+Computing engine detached from data storage and I/O.
+
+Libraries:
+
+Standard: Spark SQL, MLib, Streaming, GraphX.
+
+Hundreds of open-source third-party libraries.
+
+### Context of Big Data
+
+Computing vs Data: data storage getting better and cheaper; gathering data keeps easier and cheaper and more important
+
+Data needs to be distributed and processed in parallel
+
+Standard single-CPU software cannot scale up
+
+### Motivation for Spark
+
+A 2009 UC Berkeley project by Matei Zaharia et al
+
+MapReduce was the king of large distributed computation
+
+Spark phase 1. A simple functional programming API. Optimize multi-step applications. In-memory computation and data sharing across nodes.
+
+Spark phase 2. Interactive data science and ad-hoc computation. Spark shell and Spark SQL.
+
+Spark phase 3. Same engine, new libraries. ML, Streaming, GraphX.
+
+
+
 
 
 # 2. Spark Structured and API: DataFrames
