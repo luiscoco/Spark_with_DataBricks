@@ -661,6 +661,8 @@ We select the menu option "Workspace" then we right click to create a new Folder
 
 ![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/43746e83-5126-4596-b222-c7986a5291e0)
 
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/23e9f550-9f95-4423-80a6-94f0c7f2b2ed)
+
 After creating the Folder we select the folder and we go to the menu option "Data" and we press the "Create Table" button
 
 ![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/1f8e7d70-8d18-46d1-8d06-842b2e78697b)
@@ -669,7 +671,7 @@ We drag and drop the CSV file to be uploaded to DataBricks
 
 ![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/67e0a0b5-5c1e-48c3-94af-f09dde2145b0)
 
-![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/23e9f550-9f95-4423-80a6-94f0c7f2b2ed)
+
 
 
 
