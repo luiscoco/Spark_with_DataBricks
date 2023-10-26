@@ -1914,6 +1914,180 @@ Final Cached Data:
 +-----+---+-------------+
 ```
 
+## 3.6. More advanced topics about DataSets
+
+Let's dive into some more advanced operations with Datasets in Scala Spark using Databricks:
+
+### Window Functions:
+
+Window functions are powerful for performing operations over a specified range of rows related to the current row.
+
+```scala
+import org.apache.spark.sql.expressions.Window
+
+val windowSpec = Window.partitionBy("city").orderBy("age")
+
+val rankColumn = rank().over(windowSpec)
+val rankedData = personDataset.withColumn("rank", rankColumn)
+
+println("Ranked Data:")
+rankedData.show()
+```
+
+### UDFs (User-Defined Functions):
+
+You can use UDFs to apply custom functions to your data.
+
+```scala
+import org.apache.spark.sql.functions.udf
+
+val ageSquareUDF = udf((age: Int) => age * age)
+val squaredAgeData = personDataset.withColumn("squaredAge", ageSquareUDF($"age"))
+
+println("Squared Age Data:")
+squaredAgeData.show()
+```
+
+### Handling Null Values:
+
+Dealing with null values is a common task. You can use na to handle nulls.
+
+```scala
+val dataWithNulls = personDataset.na.fill("Unknown", Seq("city"))
+
+println("Data with Nulls Handled:")
+dataWithNulls.show()
+```
+
+### Pivot and Unpivot:
+
+Pivot and unpivot operations are useful for transforming data.
+
+```scala
+val pivotedData = personDataset.groupBy("city").pivot("name").agg(avg("age"))
+
+println("Pivoted Data:")
+pivotedData.show()
+```
+
+### Dynamic Partition Pruning:
+
+Dynamic Partition Pruning helps to optimize queries by skipping unnecessary partitions.
+
+```scala
+spark.conf.set("spark.sql.optimizer.dynamicPartitionPruning.enabled", "true")
+
+val prunedData = personDataset.filter($"city" === "New York" || $"city" === "San Francisco")
+
+println("Pruned Data:")
+prunedData.show()
+```
+
+### Bucketing:
+
+Bucketing is a technique to organize data into buckets based on hash functions.
+
+```scala
+val bucketedData = personDataset.write.bucketBy(3, "city").saveAsTable("bucketed_table")
+
+println("Bucketed Data:")
+bucketedData.show()
+```
+
+### Handling JSON Data:
+
+You can work with JSON data easily using Spark.
+
+```scala
+val jsonData = """
+   {"name": "Eve", "age": 22, "city": "Los Angeles"}
+   {"name": "Charlie", "age": 35, "city": "Seattle"}
+"""
+
+val jsonDataset = spark.read.json(Seq(jsonData).toDS())
+
+println("JSON Data:")
+jsonDataset.show()
+```
+
+These examples cover a range of advanced operations with Datasets in Scala Spark.
+
+Each of these operations addresses different aspects of data manipulation, transformation, and optimization in Spark.
+
+The above DataSets advance topics samples are included in this code:
+
+```scala
+import org.apache.spark.sql.functions._
+import org.apache.spark.sql.expressions.Window
+import org.apache.spark.sql.Dataset
+
+// Define the case class
+case class Person(name: String, age: Int, city: String)
+
+// Sample data
+val data = Seq(
+  Person("John", 25, "New York"),
+  Person("Alice", 30, "San Francisco"),
+  Person("Bob", 28, "New York"),
+  Person("Eve", 22, "Los Angeles"),
+  Person("Charlie", 35, "Seattle")
+)
+
+// Create Dataset
+val personDataset: Dataset[Person] = data.toDS()
+
+// Display initial data
+println("Initial Data:")
+personDataset.show()
+
+// 1. Window Functions
+val windowSpec = Window.partitionBy("city").orderBy("age")
+val rankColumn = rank().over(windowSpec)
+val rankedData = personDataset.withColumn("rank", rankColumn)
+println("Ranked Data:")
+rankedData.show()
+
+// 2. UDFs (User-Defined Functions)
+import org.apache.spark.sql.functions.udf
+val ageSquareUDF = udf((age: Int) => age * age)
+val squaredAgeData = personDataset.withColumn("squaredAge", ageSquareUDF($"age"))
+println("Squared Age Data:")
+squaredAgeData.show()
+
+// 3. Handling Null Values
+val dataWithNulls = personDataset.na.fill("Unknown", Seq("city"))
+println("Data with Nulls Handled:")
+dataWithNulls.show()
+
+// 4. Pivot and Unpivot
+val pivotedData = personDataset.groupBy("city").pivot("name").agg(avg("age"))
+println("Pivoted Data:")
+pivotedData.show()
+
+// 5. Dynamic Partition Pruning
+spark.conf.set("spark.sql.optimizer.dynamicPartitionPruning.enabled", "true")
+val prunedData = personDataset.filter($"city" === "New York" || $"city" === "San Francisco")
+println("Pruned Data:")
+prunedData.show()
+
+// 6. Bucketing
+val bucketedData = personDataset.write.bucketBy(3, "city").saveAsTable("bucketed_table")
+println("Bucketed Data:")
+bucketedData.show()
+
+// 7. Handling JSON Data
+val jsonData = """
+   {"name": "Eve", "age": 22, "city": "Los Angeles"}
+   {"name": "Charlie", "age": 35, "city": "Seattle"}
+"""
+val jsonDataset = spark.read.json(Seq(jsonData).toDS())
+println("JSON Data:")
+jsonDataset.show()
+
+// Stop the Spark Session
+spark.stop()
+```
+
 # 4. Spark SQL
 
 ## 4.1. Spark as a "Database" with Spark SQL Shell
