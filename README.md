@@ -4,6 +4,8 @@ https://github.com/rockthejvm/spark-essentials
 
 # 1. Welcome
 
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/d50c452d-7202-4017-9c4a-1e2520bc35d1)
+
 ## 1.1. DataBricks Community
 
 https://community.cloud.databricks.com/
