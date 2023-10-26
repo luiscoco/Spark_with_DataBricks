@@ -44,11 +44,11 @@ A 2009 UC Berkeley project by Matei Zaharia et al
 
 MapReduce was the king of large distributed computation
 
-Spark phase 1. A simple functional programming API. Optimize multi-step applications. In-memory computation and data sharing across nodes.
+**Spark phase 1**. A simple functional programming API. Optimize multi-step applications. In-memory computation and data sharing across nodes.
 
-Spark phase 2. Interactive data science and ad-hoc computation. Spark shell and Spark SQL.
+**Spark phase 2**. Interactive data science and ad-hoc computation. Spark shell and Spark SQL.
 
-Spark phase 3. Same engine, new libraries. ML, Streaming, GraphX.
+**Spark phase 3**. Same engine, new libraries. ML, Streaming, GraphX.
 
 
 
