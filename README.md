@@ -2071,9 +2071,8 @@ println("Pruned Data:")
 prunedData.show()
 
 // 6. Bucketing
-val bucketedData = personDataset.write.bucketBy(3, "city").saveAsTable("bucketed_table")
-println("Bucketed Data:")
-bucketedData.show()
+personDataset.write.bucketBy(3, "city").saveAsTable("bucketed_table")
+println("Bucketing Done")
 
 // 7. Handling JSON Data
 val jsonData = """
