@@ -50,9 +50,7 @@ MapReduce was the king of large distributed computation
 
 **Spark phase 3**. Same engine, new libraries. ML, Streaming, GraphX.
 
-
-
-
+![image](https://github.com/luiscoco/Udemy_Apache_Spark_3_Big_Data_Essentials_in_Scala_Rock_the_JVM/assets/32194879/5079d09c-2165-4998-bc0a-54e733e32b44)
 
 # 2. Spark Structured and API: DataFrames
 
