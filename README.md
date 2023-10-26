@@ -734,6 +734,64 @@ These examples assume that you have a SparkSession named spark already created.
 
 ## 2.5. Data Sources. Exercises
 
+```scala
+import org.apache.spark.sql.{SaveMode, SparkSession}
+import org.apache.spark.sql.types._
+
+object DataSources extends App {
+
+  val spark = SparkSession.builder()
+    .appName("Data Sources and Formats")
+    .getOrCreate()
+
+  // Existing code for schema definitions and reading cars data
+
+  val carsDF = spark.read
+    .format("json")
+    .schema(carsSchema)
+    .option("mode", "failFast")
+    .option("path", "dbfs:/FileStore/tables/cars.json") // Use dbfs:/FileStore/tables/ for Databricks file paths
+    .load()
+
+  // Writing DFs
+  carsDF.write
+    .format("json")
+    .mode(SaveMode.Overwrite)
+    .save("dbfs:/FileStore/tables/cars_dupe.json")
+
+  // Existing code for reading/writing JSON, CSV, Parquet, Text files, and reading from a remote DB
+
+  /**
+    * Exercise: read the movies DF, then write it as
+    * - tab-separated values file
+    * - snappy Parquet
+    * - table "public.movies" in the Postgres DB
+    */
+
+  val moviesDF = spark.read.json("dbfs:/FileStore/tables/movies.json") // Update path for Databricks
+
+  // TSV
+  moviesDF.write
+    .format("csv")
+    .option("header", "true")
+    .option("sep", "\t")
+    .save("dbfs:/FileStore/tables/movies.csv")
+
+  // Parquet
+  moviesDF.write.save("dbfs:/FileStore/tables/movies.parquet")
+
+  // Save to DF
+  moviesDF.write
+    .format("jdbc")
+    .option("driver", driver)
+    .option("url", url)
+    .option("user", user)
+    .option("password", password)
+    .option("dbtable", "public.movies")
+    .save()
+}
+```
+
 ## 2.6. DataFrames Columns and Expressions
 
 In Apache Spark with Scala, DataFrames are a fundamental abstraction representing a distributed collection of data organized into named columns. 
