@@ -2087,6 +2087,39 @@ jsonDataset.show()
 spark.stop()
 ```
 
+## 3.7. Differences between DataFrame and DataSet
+
+In summary, both DataFrames and Datasets in Spark provide high-level, distributed data manipulation APIs. 
+
+**DataFrames** offer a more **SQL-like**, schema-aware interface, while **Datasets** provide a **type-safe, object-oriented programming interface** that allows you to work with custom classes. 
+
+The choice between them depends on your specific use case and the level of type safety you require.
+
+### DataFrame:
+
+A DataFrame in Spark is an immutable distributed collection of data organized into named columns.
+
+It represents a table of data with rows and columns, much like a traditional relational database table.
+
+It provides a programming interface for data manipulation using a language-integrated API.
+
+You can think of a DataFrame as an abstraction built on top of RDD (Resilient Distributed Dataset), but with more structured and optimized operations.
+
+It allows you to perform various operations like filtering, aggregation, and joins on your data.
+
+### Dataset:
+
+A Dataset is a distributed collection of data that provides the benefits of strong typing, expressive transformations, and functional programming.
+
+It is an extension of the DataFrame API and is available in Spark 1.6 and later versions.
+
+While DataFrames are limited to the types that can be represented in Spark SQL, Datasets allow you to work with custom classes and provide a type-safe, object-oriented programming interface.
+
+Datasets can be thought of as a type-safe version of DataFrames, with the advantages of both static typing and the flexibility of DataFrames.
+
+Datasets can be used with both Java and Scala, but the type safety is particularly beneficial in Scala.
+
+
 # 4. Spark SQL
 
 ## 4.1. Spark as a "Database" with Spark SQL Shell
