@@ -11,8 +11,6 @@ https://community.cloud.databricks.com/
 ## 1.2. Scala Recap
 
 ```scala
-package part1recap
-
 import scala.concurrent.{ExecutionContext, Future}
 import scala.util.{Failure, Success}
 
